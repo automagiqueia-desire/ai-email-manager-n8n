@@ -1,0 +1,787 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "filters": {}
+      },
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -1376,
+        624
+      ],
+      "id": "9af00b69-4084-4611-858a-2fe6d0b1fcd2",
+      "name": "Gmail Trigger",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "zIXT919YSUJ4DK9S",
+          "name": "AFFAIRE"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "inputText": "={{ $json.snippet }}",
+        "categories": {
+          "categories": [
+            {
+              "category": "ABONNEMENT",
+              "description": "Cette catégorie regroupe tous les emails essentiels liés à des services actifs auxquels l'utilisateur a souscrit ou des obligations réelles. Elle inclut impérativement : les confirmations de réservation (vols, hôtels), les détails de voyage (horaires, portes d'embarquement), les factures, les reçus de paiement, et les notifications de sécurité de compte. Sont aussi inclus les newsletters de contenu à haute valeur que l'utilisateur lit régulièrement et les correspondances humaines directes. Critère de décision : Si l'email contient une référence (ex: numéro de réservation, ID de transaction) ou une information qui impacte l'agenda ou le portefeuille de l'utilisateur, il DOIT être classé ici.\" ."
+            },
+            {
+              "category": "PROSPECTION",
+              "description": "\"Emails de sollicitation commerciale active. L'expéditeur tente de vendre un service, une formation, un logiciel ou propose une 'opportunité' de business. Le ton est souvent persuasif, proposant des conseils non sollicités, des audits gratuits ou des appels de découverte pour 'aider à croître' l'activité de l'utilisateur.\"  Indicateurs et Mots-clés : Offre de services, Augmenter votre CA, Formation offerte, Appel de 15 min, Partenariat, Solution pour votre business, Coaching, Freelance, Stratégie."
+            },
+            {
+              "category": "PUBLICITÉS",
+              "description": "\"Emails de marketing de masse, newsletters purement promotionnelles et notifications automatiques de réseaux sociaux. Ce contenu est générique, envoyé à des milliers de personnes simultanément et contient souvent des offres limitées dans le temps, des soldes ou des alertes de type 'Vous avez une nouvelle notification'.\"  Indicateurs et Mots-clés : Promotion, -50%, Offre limitée, Vu sur LinkedIn, Facebook Notification, Soldes, Sponsorisé, Découvrez notre collection, Ne ratez pas."
+            },
+            {
+              "category": "WEBSITE",
+              "description": "\"Emails automatisés de 'courtoisie' ou de maintenance provenant de plateformes web ou d'applications. Il s'agit uniquement de messages de bienvenue, de présentations de nouvelles fonctionnalités (product updates), de conseils d'utilisation (tutoriels) ou d'actualités générales sur le site. Critère de décision : L'email est classé ici seulement s'il ne contient aucune information urgente, aucune facture, aucune réservation active et aucune donnée transactionnelle. C'est un email que l'utilisateur peut ignorer sans conséquence sur ses activités réelles.\" "
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.textClassifier",
+      "typeVersion": 1.1,
+      "position": [
+        -1152,
+        624
+      ],
+      "id": "4bf0d26f-62f4-4d49-ab65-1cde43fa0af9",
+      "name": "Text Classifier"
+    },
+    {
+      "parameters": {
+        "model": "meta-llama/llama-3.3-70b-instruct:free",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        -504,
+        944
+      ],
+      "id": "ccc8dd00-1f9c-4c20-9bc1-9654ab775300",
+      "name": "OpenRouter Chat Model",
+      "credentials": {
+        "openRouterApi": {
+          "id": "Mh3Rtol8uASG2XkN",
+          "name": "INITIATION-OPEN-ROUTER"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "meta-llama/llama-3.3-70b-instruct:free",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        -504,
+        1448
+      ],
+      "id": "9bbb6d1d-ea79-42ea-a592-f772901ee146",
+      "name": "OpenRouter Chat Model2",
+      "credentials": {
+        "openRouterApi": {
+          "id": "Mh3Rtol8uASG2XkN",
+          "name": "INITIATION-OPEN-ROUTER"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "mistralai/mistral-7b-instruct:free",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        -504,
+        144
+      ],
+      "id": "8905ea0f-cb12-4e18-a356-486cb0fea5ce",
+      "name": "OpenRouter Chat Model3",
+      "credentials": {
+        "openRouterApi": {
+          "id": "Mh3Rtol8uASG2XkN",
+          "name": "INITIATION-OPEN-ROUTER"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "qwen/qwen3-4b:free",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        -504,
+        544
+      ],
+      "id": "92b7ec8f-0f7f-45c1-b4d4-7e0eb6490d54",
+      "name": "OpenRouter Chat Model4",
+      "credentials": {
+        "openRouterApi": {
+          "id": "Mh3Rtol8uASG2XkN",
+          "name": "INITIATION-OPEN-ROUTER"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $json.id }}",
+        "labelIds": [
+          "Label_4299945263563762595"
+        ]
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        -800,
+        24
+      ],
+      "id": "5d098246-8c62-4a32-9960-add41294210d",
+      "name": "LABEL ABONNEMENT",
+      "webhookId": "234d59af-c0e3-41df-9d41-59dbd3e4f7b9",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "zIXT919YSUJ4DK9S",
+          "name": "AFFAIRE"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $json.id }}",
+        "labelIds": [
+          "Label_246642295186024486"
+        ]
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        -800,
+        424
+      ],
+      "id": "2be42962-f0f4-4aee-a865-a87da562f762",
+      "name": "LABEL PROSPECTION",
+      "webhookId": "b9c29a9b-3aec-481b-aaa5-86126a5dac74",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "zIXT919YSUJ4DK9S",
+          "name": "AFFAIRE"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $json.id }}",
+        "labelIds": [
+          "Label_2720940572486412582"
+        ]
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        -800,
+        824
+      ],
+      "id": "0a59b0d1-2c99-4528-b919-4b8775650909",
+      "name": "LABEL PUBLICITÉS",
+      "webhookId": "21596808-021b-491d-980d-7ef1bcfe4251",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "zIXT919YSUJ4DK9S",
+          "name": "AFFAIRE"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $json.id }}",
+        "labelIds": [
+          "Label_5039137476133638877"
+        ]
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        -800,
+        1224
+      ],
+      "id": "a5375a61-c0ee-4769-b672-9cda4c69003b",
+      "name": "LABEL WEBSITE",
+      "webhookId": "7832271b-046d-419a-9cf9-b1cc52c128ac",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "zIXT919YSUJ4DK9S",
+          "name": "AFFAIRE"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Sujet : {{ $('Text Classifier').item.json.Subject }}\n\nContenu : {{ $('Gmail Trigger').item.json.snippet }}",
+        "options": {
+          "systemMessage": "CONSIGNE GÉNÉRALE : Tu es un assistant intelligent expert en gestion de boite mail. Ta mission est de rédiger des brouillons de réponse pour les emails classés dans la catégorie \"Abonnement\". Ce sont des emails prioritaires (services actifs, voyages, factures ou contacts humains).\n\nTES MISSIONS :\n\nAnalyse : Lis attentivement l'email reçu. Identifie s'il s'agit d'une information transactionnelle (ex: Ryanair), d'une facture, ou d'un message d'une personne physique.\n\nRédaction du brouillon :\n\nPour un service (Voyage/SaaS) : Rédige une réponse courte confirmant que j'ai bien pris connaissance des détails et que j'ai enregistré les informations.\n\nPour une facture : Rédige un message indiquant que la facture est bien reçue et transmise pour traitement.\n\nPour un contact humain : Sois chaleureux. Remercie la personne et informe-la que j'ai bien reçu son message et que je reviendrai vers elle très prochainement avec une réponse complète.\n\nRÈGLES D'OR :\n\nConcision : Pas plus de 3 ou 4 phrases.\n\nLangue : Réponds TOUJOURS dans la langue de l'expéditeur (si l'email est en anglais, réponds en anglais).\n\nTon : Professionnel, poli et aidant.\n\nSignature : Termine par \"Cordialement, [Mon Nom]\".\n\nFORMAT DE SORTIE : Donne-moi uniquement le texte du brouillon, prêt à être inséré dans un e-mail."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        -576,
+        -80
+      ],
+      "id": "ea4ef5ca-7d0d-4903-b5e5-15fdde589950",
+      "name": "EMAIL ABONNEMENT"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Sujet :{{ $('Gmail Trigger').item.json.Subject }}\n\nContenu : {{ $('Gmail Trigger').item.json.snippet }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "RÔLE : Tu es un assistant spécialisé dans le tri sélectif des emails publicitaires et promotionnels. Ton objectif est de résumer l'intérêt commercial de l'email et de préparer une action de classement.\n\nCONSIGNES DE RÉDACTION :\n\nAnalyse de l'offre : Détermine immédiatement ce que l'email essaie de vendre et s'il y a un avantage spécifique (ex: code promo \"HIVER20\", réduction de 30%).\n\nRédaction du Brouillon :\n\nSi l'offre est pertinente : Rédige un message pour toi-même ou pour le service : \"Merci pour cette offre. Je l'ai notée pour mes futurs achats.\"\n\nSi c'est une newsletter classique : Rédige un message très court : \"Bien reçu, merci pour les informations.\"\n\nSi l'email est trop intrusif : Rédige : \"Merci de me désabonner de cette liste de diffusion.\"\n\nTon : Très bref, formel et distant."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        -576,
+        720
+      ],
+      "id": "4d6c523c-9a41-49ce-9851-82ce2b92837b",
+      "name": "EMAIL PUBLICITÉ"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Sujet : {{ $('Gmail Trigger').item.json.Subject }}\n\nContenu : {{ $('Gmail Trigger').item.json.snippet }}",
+        "options": {
+          "systemMessage": "RÔLE : Tu es un assistant spécialisé dans la gestion des interactions avec les plateformes web et services SaaS. Ton but est de traiter les emails de la catégorie \"Website\" (emails automatisés, onboarding, mises à jour produit).\n\nCONSIGNES DE RÉDACTION :\n\nAnalyse de l'expéditeur : Identifie de quel service provient l'email (ex: \"votre compte WordPress\", \"mise à jour n8n\").\n\nRédaction du Brouillon :\n\nEmail de Bienvenue : Rédige une réponse courte : \"Merci pour l'accueil ! Je suis ravi de rejoindre la communauté [Nom du site] et de découvrir vos fonctionnalités.\"\n\nMise à jour / News : Rédige : \"Bien reçu pour ces nouveautés concernant [Nom du service]. Merci pour le suivi.\"\n\nAlerte Sécurité / Connexion : Rédige uniquement \"Notification de sécurité traitée.\" (Ces brouillons serviront de note interne ou ne seront pas envoyés).\n\nTon : Direct, technophile, minimaliste."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        -576,
+        1224
+      ],
+      "id": "a22bbb1f-6c09-47cb-a885-7c93b53d0cdc",
+      "name": "EMAIL WEBSITE"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Sujet :{{ $('Gmail Trigger').item.json.Subject }}\n\nContenu : {{ $('Gmail Trigger').item.json.snippet }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "RÔLE : Tu es un assistant de gestion de messagerie de haut niveau. Ta mission est de préparer des brouillons de réponse parfaits pour les emails reçus.\n\nINSTRUCTIONS DE RÉDACTION :\n\nLangue : Réponds impérativement dans la langue de l'email reçu.\n\nSujet : Crée un objet court et explicite commençant par \"RE: \".\n\nCorps : > - Utilise un ton professionnel et chaleureux.\n\nSi c'est un email de service (ex: Ryanair), confirme la bonne prise en compte.\n\nSi c'est un humain, remercie-le et indique que \"je reviens vers vous rapidement\".\n\nSigne avec \"Cordialement, [ AFFAIRE\".\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        -576,
+        320
+      ],
+      "id": "fc8445dd-9bc3-4dd5-a8ce-88c612ff9994",
+      "name": "EMAIL PROSPECTION"
+    },
+    {
+      "parameters": {
+        "resource": "draft",
+        "subject": "={{ $('Gmail Trigger').item.json.Subject }}",
+        "message": "={{ $json.output }}",
+        "options": {
+          "fromAlias": "affaireplan4@gmail.com",
+          "replyTo": "={{ $('Gmail Trigger').item.json.From }}"
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        -224,
+        24
+      ],
+      "id": "5032da6a-baf1-4f71-a209-a3dc28dcab0e",
+      "name": "DRAFT ABONNEMENT",
+      "webhookId": "f6077c76-7872-46a5-b144-a1ae18c4afc6",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "zIXT919YSUJ4DK9S",
+          "name": "AFFAIRE"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "draft",
+        "subject": "={{ $('Gmail Trigger').item.json.Subject }}",
+        "message": "={{ $json.output }}",
+        "options": {
+          "fromAlias": "affaireplan4@gmail.com"
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        -224,
+        424
+      ],
+      "id": "56087061-e778-4786-8347-adf8b9e45ee6",
+      "name": "DRAFT PROSPECTION",
+      "webhookId": "71467d1a-cb99-4c38-94a3-daf3fd3ceaf8",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "zIXT919YSUJ4DK9S",
+          "name": "AFFAIRE"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "draft",
+        "subject": "={{ $('Gmail Trigger').item.json.Subject }}",
+        "message": "={{ $json.output }}",
+        "options": {
+          "fromAlias": "affaireplan4@gmail.com"
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        -224,
+        824
+      ],
+      "id": "8cfdc711-98a8-4c20-b620-932fd94a37a2",
+      "name": "DRAFT PUBLICITÉ",
+      "webhookId": "71467d1a-cb99-4c38-94a3-daf3fd3ceaf8",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "zIXT919YSUJ4DK9S",
+          "name": "AFFAIRE"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "draft",
+        "subject": "={{ $('Gmail Trigger').item.json.Subject }}",
+        "message": "=",
+        "options": {
+          "fromAlias": "affaireplan4@gmail.com"
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        -224,
+        1224
+      ],
+      "id": "dec201dc-33a8-45ab-843c-7e0d34b2cbe7",
+      "name": "DRAFT WEBSITE",
+      "webhookId": "f52aa485-b9b2-4888-b8a2-cd80447a752f",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "zIXT919YSUJ4DK9S",
+          "name": "AFFAIRE"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "7597024007",
+        "text": "=VOus venez de recevoir un E-mail Trés important de : {{ $('Gmail Trigger').item.json.From }}\n\nNous avons crée un brouillon de la réponse . le voici : {{ $('EMAIL ABONNEMENT').item.json.output }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        24
+      ],
+      "id": "d99ec66b-ede2-4ed9-aec0-81b5d8a5976b",
+      "name": "SEND NOTIFICATION",
+      "webhookId": "1aee8aa9-6a38-4e9c-9c32-6dbacc522574",
+      "credentials": {
+        "telegramApi": {
+          "id": "gzJzfHLtyMDoJ2Yv",
+          "name": "AfEmailManager"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "7597024007",
+        "text": "=Tu as reçu un email de prospection de la part de {{ $('Gmail Trigger').item.json.From }}\n\n on a crée un brouillon de reponse . le voici : \n\n{{ $('Gmail Trigger').item.json.snippet }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        424
+      ],
+      "id": "efc232e4-b62a-4399-83aa-d2b856a858a6",
+      "name": "SEND NOTIFICATION1",
+      "webhookId": "e51fd829-dda7-49b8-9afc-ae1585ecd2da",
+      "credentials": {
+        "telegramApi": {
+          "id": "gzJzfHLtyMDoJ2Yv",
+          "name": "AfEmailManager"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "7597024007",
+        "text": "=Tu as reçu un email de PUBLICITÉ de la part de {{ $('Gmail Trigger').item.json.From }}\n\n on a crée un brouillon de reponse . le voici : \n\n{{ $('EMAIL PUBLICITÉ').item.json.output }}\n",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        824
+      ],
+      "id": "b1a6913a-4f82-4720-beb3-7172f69ec9fa",
+      "name": "SEND NOTIFICATION2",
+      "webhookId": "e51fd829-dda7-49b8-9afc-ae1585ecd2da",
+      "credentials": {
+        "telegramApi": {
+          "id": "gzJzfHLtyMDoJ2Yv",
+          "name": "AfEmailManager"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "7597024007",
+        "text": "=Tu viens de recevoir un email de la categorie WEBSITE de la part de \n{{ $('Gmail Trigger').item.json.From }}\nnous avons crée un brouillon de reponse . le voici : \n{{ $('EMAIL WEBSITE').item.json.output }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        1224
+      ],
+      "id": "3dfcd733-7999-4770-b7b2-8de85299fa56",
+      "name": "SEND NOTIFICATION3",
+      "webhookId": "165172cb-86e5-457f-a25e-3fe8ce7dfcbb",
+      "credentials": {
+        "telegramApi": {
+          "id": "gzJzfHLtyMDoJ2Yv",
+          "name": "AfEmailManager"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "meta-llama/llama-3.3-70b-instruct:free",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        -1080,
+        912
+      ],
+      "id": "aaa543be-6cba-43ca-8dc0-1d2723513736",
+      "name": "BRAIN",
+      "credentials": {
+        "openRouterApi": {
+          "id": "Mh3Rtol8uASG2XkN",
+          "name": "INITIATION-OPEN-ROUTER"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Gmail Trigger": {
+      "main": [
+        [
+          {
+            "node": "Text Classifier",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Text Classifier": {
+      "main": [
+        [
+          {
+            "node": "LABEL ABONNEMENT",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "LABEL PROSPECTION",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "LABEL PUBLICITÉS",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "LABEL WEBSITE",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "EMAIL PUBLICITÉ",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "EMAIL WEBSITE",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model3": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "EMAIL ABONNEMENT",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model4": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "EMAIL PROSPECTION",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "LABEL ABONNEMENT": {
+      "main": [
+        [
+          {
+            "node": "EMAIL ABONNEMENT",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "LABEL PROSPECTION": {
+      "main": [
+        [
+          {
+            "node": "EMAIL PROSPECTION",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "LABEL PUBLICITÉS": {
+      "main": [
+        [
+          {
+            "node": "EMAIL PUBLICITÉ",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "LABEL WEBSITE": {
+      "main": [
+        [
+          {
+            "node": "EMAIL WEBSITE",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "EMAIL ABONNEMENT": {
+      "main": [
+        [
+          {
+            "node": "DRAFT ABONNEMENT",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "EMAIL PUBLICITÉ": {
+      "main": [
+        [
+          {
+            "node": "DRAFT PUBLICITÉ",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "EMAIL WEBSITE": {
+      "main": [
+        [
+          {
+            "node": "DRAFT WEBSITE",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "EMAIL PROSPECTION": {
+      "main": [
+        [
+          {
+            "node": "DRAFT PROSPECTION",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DRAFT ABONNEMENT": {
+      "main": [
+        [
+          {
+            "node": "SEND NOTIFICATION",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DRAFT PROSPECTION": {
+      "main": [
+        [
+          {
+            "node": "SEND NOTIFICATION1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DRAFT PUBLICITÉ": {
+      "main": [
+        [
+          {
+            "node": "SEND NOTIFICATION2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DRAFT WEBSITE": {
+      "main": [
+        [
+          {
+            "node": "SEND NOTIFICATION3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "BRAIN": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Text Classifier",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {
+    "LABEL PROSPECTION": [
+      {
+        "id": "19b3cf1a5fa50cd5",
+        "threadId": "19b3cf1a5fa50cd5",
+        "labelIds": [
+          "Label_246642295186024486",
+          "UNREAD",
+          "CATEGORY_PERSONAL",
+          "INBOX"
+        ]
+      }
+    ],
+    "EMAIL ABONNEMENT": [
+      {
+        "output": "Bonjour,\n\nJe vous remercie pour cette information importante. J'ai bien pris connaissance des détails concernant la suppression de mes produits et paramétrages. J'ai enregistré cette notification.\n\nCordialement, [Mon Nom]"
+      }
+    ],
+    "EMAIL WEBSITE": [
+      {
+        "output": "Analyse de l'expéditeur : L'email provient du service \"n8n\".\n\nRédaction du Brouillon : \n\"Mise à jour / News : Bien reçu pour ces informations concernant n8n. Merci pour le suivi.\""
+      }
+    ]
+  },
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "53c20ac9134564451ff9daa9619c49e52525fa22048a323d430651b0c4107def"
+  }
+}
