@@ -7,7 +7,7 @@
 ---
 
 ## 📺 Aperçu du Workflow
-![Schéma du Workflow](workflow-schema-image.png)
+![Schéma du Workflow](workflow-image.png)
 *Visualisation de l'architecture logique : du trigger Gmail à la notification Telegram.*
 
 ## 🎯 Valeur Ajoutée Business
